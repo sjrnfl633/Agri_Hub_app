@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "539299329337",
+    "project_id": "agrihub-ce3d0",
+    "storage_bucket": "agrihub-ce3d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539299329337:android:a11c2dcc9c2bc496f4a4e8",
+        "android_client_info": {
+          "package_name": "com.example.agri_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539299329337-i64ua54lt0h0ld5ls7eu6eggam6vg35u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq2RZb-yy7U6KAt59kJhzBeO7j3kn-nmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539299329337-i64ua54lt0h0ld5ls7eu6eggam6vg35u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
