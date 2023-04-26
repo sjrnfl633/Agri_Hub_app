@@ -35,15 +35,16 @@ class DeviceAdapter(private val devices: List<UmachineItem>) : RecyclerView.Adap
         context = holder.itemView.context
         detailIntent = Intent(context, DetailActivity::class.java)
 
+
         fun manualRequest() {
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.0.247:8000")
+                .baseUrl("http://172.21.4.78:8000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val apiService = retrofit.create(ApiService::class.java)
             val token = com.example.agri_hub.MainActivity.accessToken
             val deviceId = Device(device.device)
-            val call = apiService.manualRequest( accesstoken = "Bearer $token", device = deviceId)
+            val call = apiService.manualRequest(accesstoken = "Bearer $token", device = deviceId)
             Log.e("딩바이스", device.device)
             call.enqueue(object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
@@ -66,55 +67,61 @@ class DeviceAdapter(private val devices: List<UmachineItem>) : RecyclerView.Adap
                     Log.e("전송", t.stackTraceToString())
                 }
             })
-
         }
-        fun manuallist() {
+        fun manualtrol(responseData: List<Map<String, Any>>, deviceName: String) {
+            for (data in responseData) {
+                if (data["device"] == deviceName) {
+                    id = data["id"].toString().toDouble().toInt()
+                    Log.e("전송", "Device ID $id found")
+                    detailIntent.putExtra("did",id)
+                    detailIntent.putExtra("umachine_id", deviceName)
+                    detailIntent.putExtra("umachine_add", device.m_address)
+                    Log.e("Intent",id.toString())
+                    Log.e("Intent",deviceName)
+                    Log.e("Intent",device.m_address.toString())
+                    context.startActivity(detailIntent)
+                    return
+                }
+            }
+            manualRequest()
+        }
+        fun manuallist(position: Int) {
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.0.247:8000")
+                .baseUrl("http://172.21.4.78:8000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val apiService = retrofit.create(ApiService::class.java)
             val token = com.example.agri_hub.MainActivity.accessToken
             val deviceId = Device(device.device)
             val call = apiService.manualGET( accesstoken = "Bearer $token")
-            Log.e("딩바이스", device.device)
+            Log.e("딩바이스11", device.device)
             call.enqueue(object : Callback<Any> {
                 // callback methods here
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.isSuccessful) {
-                        Log.e("전송", response.body().toString())
-                        Log.e("전송", response.code().toString())
-                        Log.e("전송", "test success")
+                        Log.e("전송100", response.body().toString())
+                        Log.e("전송100", response.code().toString())
+                        Log.e("전송100", "test success")
 
                         val responseData = response.body() as List<Map<String, Any>>
-                        for (data in responseData) {
-                            if (data["device"] == device.device) {
-                                id = data["id"].toString().toDouble().toInt()
-                                Log.e("전송", "Device ID $id found")
-                                detailIntent.putExtra("did",id)
-                                detailIntent.putExtra("umachine_id", device.device)
-                                detailIntent.putExtra("umachine_add", device.m_address)
-                                Log.e("Intent",detailIntent.toString())
-                                break
-                            }
-                        }
-                        if (id == null) {
-                            manualRequest()
-                        }
+                        Log.e("전송100", responseData.toString())
+                        manualtrol(responseData, device.device)
                     } else {
                         Log.e("전송", response.code().toString())
                         Log.e("전송", response.message())
                         Log.e("전송", response.errorBody().toString())
+                        manualRequest()
                     }
-                    context.startActivity(detailIntent)
-
                 }
 
                 override fun onFailure(call: Call<Any>, t: Throwable) {
                     Log.e("전송", t.stackTraceToString())
+                    manualRequest()
                 }
             })
         }
+
+
 
 
 
@@ -126,7 +133,7 @@ class DeviceAdapter(private val devices: List<UmachineItem>) : RecyclerView.Adap
         holder.binding.deviceStatus.text = device.device
 
         holder.itemView.setOnClickListener {1
-            manuallist()
+            manuallist(position)
         }
     }
     override fun getItemCount() = devices.size

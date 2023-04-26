@@ -70,6 +70,10 @@ class HomeActivity : AppCompatActivity() {
             val charttab = Intent(this, ChartTabActivity::class.java)
             startActivity(charttab)
         }
+        binding.cameratab.setOnClickListener {
+            val intent = Intent(this, CamMenuActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

@@ -243,7 +243,7 @@ class DetailActivity : AppCompatActivity() {
         rctime: Int
     ) {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.247:8000")
+            .baseUrl("http://172.21.4.78:8000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiService = retrofit.create(ApiService::class.java)
