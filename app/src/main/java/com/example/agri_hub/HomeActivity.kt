@@ -131,79 +131,79 @@ class HomeActivity : AppCompatActivity() {
             }.start()
 
 
-//            val retrofit = Retrofit.Builder()
-//                .baseUrl("http://apis.data.go.kr/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//
-//            val service = retrofit.create(WeatherService::class.java)
-//
-//            val baseDateTime = BaseDateTime.getBaseDateTime()
-//            val converter = GeoPointConverter()
-//            val point = converter.convert(lat = it.latitude, lon = it.longitude)
-//            service.getVillageForecast(
-//                serviceKey = "I/tH7Id5tNl5EnG//AhdBTvEvqsJMDS/zTPm+fozvoZx8ddV07a7aNYqPYtdaN0JdO0dReaiV6ppgQsgHM/JzQ==",
-//                baseDate = baseDateTime.baseDate,
-//                baseTime = baseDateTime.baseTime,
-//                nx = point.nx,
-//                ny = point.ny
-//            ).enqueue(object : Callback<WeatherEntity> {
-//                override fun onResponse(call: Call<WeatherEntity>, response: Response<WeatherEntity>) {
-//                    val forecastDateTimeMap = mutableMapOf<String, Forecast>()
-//                    val forecastList = response.body()?.response?.body?.items?.forecastEntities.orEmpty()
-//                    for (forecast in forecastList) {
-////                    Log.e("Forecast",forecast.toString())
-//
-//                        if(forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"] ==null) {
-//                            forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"] =
-//                                Forecast(
-//                                    forecastDate = forecast.forecastDate,
-//                                    forecastTime = forecast.forecastTime
-//                                )
-//                        }
-//                        forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"]?.apply {
-//                            when (forecast.category) {
-//                                Category.POP-> precipitation = forecast.forecastValue.toInt()
-//                                Category.PTY-> precipitationType = transformRainType(forecast)
-//                                Category.SKY-> sky = transformSky(forecast)
-//                                Category.TMP-> temperature = forecast.forecastValue.toDouble()
-//                                else -> {}
-//                            }
-//                        }
-//                    }
-//
-//                    val list = forecastDateTimeMap.values.toMutableList()
-//                    list.sortWith { f1,f2 ->
-//                        val f1DateTime = "${f1.forecastDate}${f1.forecastTime}"
-//                        val f2DateTime = "${f2.forecastDate}${f2.forecastTime}"
-//
-//                        return@sortWith f1DateTime.compareTo(f2DateTime)
-//                    }
-//
-//                    val currentForecast = list.first()
-//                    binding.temperatureTextView.text = getString(R.string.temperature_text, currentForecast.temperature)
-//                    binding.skyTextView.text = currentForecast.weather
-//                    binding.precipitationTextView.text = getString(R.string.precipitation_text, currentForecast.precipitation)
-//
-//                    binding.childForecastLayout.apply {
-//                        list.forEachIndexed { index, forecast ->
-//                            if (index ==  0) { return@forEachIndexed }
-//
-//                            val itemView = ItemForecastBinding.inflate(layoutInflater)
-//                            itemView.timeTextView.text = forecast.forecastTime
-//                            itemView.weatherTextView.text = forecast.weather
-//                            itemView.temperatureTextView.text = getString(R.string.temperature_text,forecast.temperature)
-//                            addView(itemView.root)
-//                        }
-//                    }
-//
-//                    Log.e("Forecast", forecastDateTimeMap.toString())
-//                }
-//
-//                override fun onFailure(call: Call<WeatherEntity>, t: Throwable) {
-//                    t.printStackTrace()
-//                }
-//            })
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://apis.data.go.kr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(WeatherService::class.java)
+
+            val baseDateTime = BaseDateTime.getBaseDateTime()
+            val converter = GeoPointConverter()
+            val point = converter.convert(lat = it.latitude, lon = it.longitude)
+            service.getVillageForecast(
+                serviceKey = "I/tH7Id5tNl5EnG//AhdBTvEvqsJMDS/zTPm+fozvoZx8ddV07a7aNYqPYtdaN0JdO0dReaiV6ppgQsgHM/JzQ==",
+                baseDate = baseDateTime.baseDate,
+                baseTime = baseDateTime.baseTime,
+                nx = point.nx,
+                ny = point.ny
+            ).enqueue(object : Callback<WeatherEntity> {
+                override fun onResponse(call: Call<WeatherEntity>, response: Response<WeatherEntity>) {
+                    val forecastDateTimeMap = mutableMapOf<String, Forecast>()
+                    val forecastList = response.body()?.response?.body?.items?.forecastEntities.orEmpty()
+                    for (forecast in forecastList) {
+//                    Log.e("Forecast",forecast.toString())
+
+                        if(forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"] ==null) {
+                            forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"] =
+                                Forecast(
+                                    forecastDate = forecast.forecastDate,
+                                    forecastTime = forecast.forecastTime
+                                )
+                        }
+                        forecastDateTimeMap["${forecast.forecastDate}/${forecast.forecastTime}"]?.apply {
+                            when (forecast.category) {
+                                Category.POP-> precipitation = forecast.forecastValue.toInt()
+                                Category.PTY-> precipitationType = transformRainType(forecast)
+                                Category.SKY-> sky = transformSky(forecast)
+                                Category.TMP-> temperature = forecast.forecastValue.toDouble()
+                                else -> {}
+                            }
+                        }
+                    }
+
+                    val list = forecastDateTimeMap.values.toMutableList()
+                    list.sortWith { f1,f2 ->
+                        val f1DateTime = "${f1.forecastDate}${f1.forecastTime}"
+                        val f2DateTime = "${f2.forecastDate}${f2.forecastTime}"
+
+                        return@sortWith f1DateTime.compareTo(f2DateTime)
+                    }
+
+                    val currentForecast = list.first()
+                    binding.temperatureTextView.text = getString(R.string.temperature_text, currentForecast.temperature)
+                    binding.skyTextView.text = currentForecast.weather
+                    binding.precipitationTextView.text = getString(R.string.precipitation_text, currentForecast.precipitation)
+
+                    binding.childForecastLayout.apply {
+                        list.forEachIndexed { index, forecast ->
+                            if (index ==  0) { return@forEachIndexed }
+
+                            val itemView = ItemForecastBinding.inflate(layoutInflater)
+                            itemView.timeTextView.text = forecast.forecastTime
+                            itemView.weatherTextView.text = forecast.weather
+                            itemView.temperatureTextView.text = getString(R.string.temperature_text,forecast.temperature)
+                            addView(itemView.root)
+                        }
+                    }
+
+                    Log.e("Forecast", forecastDateTimeMap.toString())
+                }
+
+                override fun onFailure(call: Call<WeatherEntity>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
         }
     }
 }

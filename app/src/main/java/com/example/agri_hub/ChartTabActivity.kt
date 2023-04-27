@@ -38,7 +38,7 @@ class ChartTabActivity: AppCompatActivity() {
         val gson = Gson()
         val barChart = binding.barChart
         val irrijson =
-            "[{\"id\":1,\"irrigation\":70,\"created_at\":\"03-01\"},{\"id\":2,\"irrigation\":10,\"created_at\":\"03-02\"},{\"id\":3,\"irrigation\":110,\"created_at\":\"03-03\"},{\"id\":4,\"irrigation\":60,\"created_at\":\"03-04\"},{\"id\":5,\"irrigation\":30,\"created_at\":\"03-05\"},{\"id\":6,\"irrigation\":180,\"created_at\":\"03-06\"},{\"id\":7,\"irrigation\":200,\"created_at\":\"03-07\"}]"
+            "[{\"id\":1,\"irrigation\":70,\"created_at\":\"04-20\"},{\"id\":2,\"irrigation\":10,\"created_at\":\"04-21\"},{\"id\":3,\"irrigation\":110,\"created_at\":\"04-22\"},{\"id\":4,\"irrigation\":60,\"created_at\":\"04-23\"},{\"id\":5,\"irrigation\":30,\"created_at\":\"04-24\"},{\"id\":6,\"irrigation\":180,\"created_at\":\"04-25\"},{\"id\":7,\"irrigation\":200,\"created_at\":\"04-26\"}]"
         val irrigationData = Gson().fromJson(irrijson, Array<IrrigationData>::class.java).toList()
         val entries = irrigationData.map { BarEntry(it.id.toFloat(), it.irrigation.toFloat()) }
         val dataSet = BarDataSet(entries, "Irrigation")
@@ -59,43 +59,43 @@ class ChartTabActivity: AppCompatActivity() {
       "id":1,
       "temperature":10.2,
       "humidity":36.0,
-      "created_at":"23-03-01"
+      "created_at":"04-20"
    },
    {
       "id":2,
       "temperature":11.0,
       "humidity":47.6,
-      "created_at":"23-03-02"
+      "created_at":"04-21"
    },
    {
       "id":3,
       "temperature":11.3,
       "humidity":42.8,
-      "created_at":"23-03-03"
+      "created_at":"04-22"
    },
    {
       "id":4,
       "temperature":13.0,
       "humidity":63.6,
-      "created_at":"23-03-04"
+      "created_at":"04-23"
    },
    {
       "id":5,
       "temperature":9.0,
       "humidity":47.2,
-      "created_at":"23-03-05"
+      "created_at":"04-24"
    },
    {
       "id":6,
       "temperature":16.0,
       "humidity":38.7,
-      "created_at":"23-03-06"
+      "created_at":"04-25"
    },
    {
       "id":7,
       "temperature":18.0,
       "humidity":47.3,
-      "created_at":"23-03-07"
+      "created_at":"04-26"
    }
 ]"""
 

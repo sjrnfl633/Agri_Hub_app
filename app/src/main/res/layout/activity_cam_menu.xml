@@ -14,7 +14,7 @@
         android:layout_marginTop="264dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/camera" />
+        android:src="@drawable/camera" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -24,7 +24,7 @@
         android:layout_marginEnd="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/length" />
+        android:src="@drawable/length" />
 
     <TextView
         android:id="@+id/textView4"

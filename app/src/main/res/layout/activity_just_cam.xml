@@ -6,18 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".JustCamActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:elevation="0dp"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:minHeight="?actionBarSize"
+        android:text="작물 감시 카메라"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/webViewContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.009" />
+
     <LinearLayout
         android:id="@+id/webViewContainer"
-        android:layout_width="350dp"
-        android:layout_height="424dp"
+        android:layout_width="430dp"
+        android:layout_height="401dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="31dp"
         android:layout_marginBottom="154dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
