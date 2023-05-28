@@ -142,7 +142,7 @@ class HomeActivity : AppCompatActivity() {
             val converter = GeoPointConverter()
             val point = converter.convert(lat = it.latitude, lon = it.longitude)
             service.getVillageForecast(
-                serviceKey = "I/tH7Id5tNl5EnG//AhdBTvEvqsJMDS/zTPm+fozvoZx8ddV07a7aNYqPYtdaN0JdO0dReaiV6ppgQsgHM/JzQ==",
+                serviceKey = "secret",
                 baseDate = baseDateTime.baseDate,
                 baseTime = baseDateTime.baseTime,
                 nx = point.nx,
