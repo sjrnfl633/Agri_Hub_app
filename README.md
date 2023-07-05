@@ -1,5 +1,5 @@
 ```git clone으로 프로젝트 다운로드```
-https://github.com/Dong-ho23/Agri_Hub
+https://github.com/sjrnfl633/Agri_Hub_app
 ​
 
 # 의존성 추가
